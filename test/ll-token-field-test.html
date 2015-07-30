@@ -1,0 +1,111 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../ll-token-field.html">
+  </head>
+  <body>
+
+    <ll-token-field></ll-token-field>
+
+    <script>
+      var myEl = document.querySelector('ll-token-field');
+
+      describe('<ll-token-field>', function() {
+        afterEach(function(done) {
+          myEl.tags = [];
+          flush(done);
+        });
+
+        describe('Basic behavior', function() {
+          it('can be placed on the page', function() {
+            expect(myEl.tags.length).to.eq(0);
+          });
+
+          it('can grab tags', function() {
+            expect(myEl.tags.length).to.eq(0);
+          });
+        });
+
+        describe('Adding tags', function() {
+          it('can add a tag when input is not empty', function() {
+            expect(myEl.tags.length).to.eql(0);
+            var evt = {
+              stopPropagation: function() {},
+              preventDefault: function() {},
+              keyCode: 9 // TAB
+            };
+            myEl.$$('#tag-input').value = '1';
+            myEl._onKeyPress(evt);
+            expect(myEl.tags.length).to.eql(1);
+            expect(myEl.tags).to.eql(['1']);
+          });
+
+          it('cannot add a tag when input is empty', function() {
+            console.log(myEl.tags.length);
+            expect(myEl.tags.length).to.eql(0);
+            var evt = {
+              stopPropagation: function() {},
+              preventDefault: function() {},
+              keyCode: 9 // TAB
+            };
+
+            myEl.$$('#tag-input').value = '';
+            myEl._onKeyPress(evt);
+            expect(myEl.tags.length).to.eql(0);
+          });
+        });
+
+        describe('Removing tags', function() {
+          it('can remove tags when input has no text in it', function() {
+            insertItem(1);
+            insertItem(2);
+            expect(myEl.tags.length).to.eql(2);
+
+            var evt = {
+              keyCode: 8 // Backspace
+            };
+
+            myEl.$$('#tag-input').value = '';
+            myEl._onKeyPress(evt);
+            expect(myEl.tags.length).to.eql(1);
+          });
+
+          it('can not remove tags when input has text in it', function() {
+            insertItem(1);
+            insertItem(2);
+            expect(myEl.tags.length).to.eql(2);
+
+            var evt = {
+              keyCode: 8 // Backspace
+            };
+
+            myEl.$$('#tag-input').value = 'block';
+            myEl._onKeyPress(evt);
+            expect(myEl.tags.length).to.eql(2);
+          });
+
+          var insertItem = function(item) {
+            myEl.tags.push(item);
+          };
+        });
+
+      });
+    </script>
+
+  </body>
+</html>

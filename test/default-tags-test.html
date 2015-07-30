@@ -9,18 +9,30 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <title>ll-token-field Demo</title>
+
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
     <link rel="import" href="../ll-token-field.html">
-  </head>
-  <body>
+</head>
+    <body>
 
-    <p>An example of <code>&lt;ll-token-field&gt;</code>:</p>
+    <ll-token-field tags='[1, 2, 3, 4]'></ll-token-field>
 
-    <ll-token-field tags='["1", "2", "3", "4"]'></ll-token-field>
+    <script>
+        var myEl = document.querySelector('ll-token-field');
 
-  </body>
+        describe('Default tags', function() {
+            it('can take an array of default tags', function() {
+                expect(myEl.tags.length).to.eql(4);
+                expect(myEl.tags).to.eql([1, 2, 3, 4]);
+            });
+        });
+    </script>
+
+    </body>
 </html>
+
