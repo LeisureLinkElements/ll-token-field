@@ -21,7 +21,8 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0",
-    "lodash": "~3.10.0"
+    "lodash": "~3.10.0",
+    "ll-theme": "LeisureLinkElements/ll-theme#~0.0.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
