@@ -1,12 +1,3 @@
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../ll-theme/ll-theme.html">
 <script type="application/javascript" src="bower_components/lodash/lodash.min.js"></script>
@@ -20,6 +11,11 @@ Example:
 
 @demo
 -->
+
+<!--
+  Styles taken from http://sliptree.github.io/bootstrap-tokenfield/
+  I would like to extend this further to calculate the size of the input box along with the other validation rules.
+-->
 <dom-module id="ll-token-field">
 
   <style>
@@ -27,57 +23,101 @@ Example:
       display: block;
       box-sizing: border-box;
     }
-    :host div {
-      border: 1px solid #B1B1B1;
-      width: 100%;
+
+    .tokenfield {
+      height: auto;
+      min-height: 34px;
+      padding-bottom: 0px;
     }
-    #tags-container {
-      display: inline-block;
-      padding: 0% 1%;
-    }
-    #tag-input-container {
-      display: inline-block;
-    }
-    #tag-input {
-      border-style: none;
-      background: transparent;
-      padding: 0% 1%;
-      width: 100%;
-    }
-    #tag-input:focus {
+    .tokenfield.focus {
+      border-color: #66afe9;
       outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, 0.6);
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, 0.6);
     }
+
     .token {
-      background: rgba(130, 132, 135, .2);
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
       border-radius: 3px;
-      box-shadow: rgba(255,255,255,.2) 0 1px 0 inset,#000 0 1px 3px;
-      padding: 0px 10px;
-      margin: 0px 2px;
+      display: inline-block;
+      border: 1px solid #d9d9d9;
+      background-color: #fff;
+      white-space: nowrap;
+      margin: -1px 5px 5px 0;
+      height: 22px;
+      vertical-align: top;
+      cursor: default;
     }
-    .token-delete{
-      vertical-align: middle;
+
+    .token:hover {
+      border-color: #b9b9b9;
+    }
+    .token.active {
+      border-color: #52a8ec;
+      border-color: rgba(82, 168, 236, 0.8);
+    }
+    .token .token-label {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-left: 4px;
+      vertical-align: top;
+      color: #0069A9;
+    }
+    .token .close {
+      font-family: Arial;
+      display: inline-block;
+      line-height: 100%;
+      font-size: 1.1em;
+      line-height: 1.49em;
+      margin-left: 5px;
+      float: none;
+      height: 100%;
+      vertical-align: top;
+      padding-right: 4px;
+    }
+    .token-input {
+      background: none;
+      width: 150px;
       border: 0;
-      background: 0 0;
-      opacity: .2;
-      -webkit-appearance: none;
-      color: black;
-      cursor: pointer;
+      height: 20px;
+      padding: 0;
+      margin-bottom: 6px;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+    .token-input:focus {
+      border-color: transparent;
+      outline: 0;
+      /* IE6-9 */
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+
+    .inline {
+      display: inline-block;
     }
   </style>
 
   <template>
-    <div>
-        <span id="tags-container">
-          <template is="dom-repeat" items="[[tags]]">
-            <span>
-              <span class="token">{{item}}<button id="{{item}}" class="token-delete" on-tap="_removeToken">&times;</button></span>
-            </span>
-          </template>
-        </span>
-      <span id="tag-input-container">
-          <input id="tag-input" type="text" on-keydown="_onKeyPress" />
-      </span>
+    <div class="tokenfield form-control" id="tags-container" on-tap="_focusInput">
+      <div class="inline">
+        <template is="dom-repeat" items="[[tags]]">
+          <div class="token">
+            <span class="token-label" style="max-width: 770px;">{{item}}</span>
+            <a href="#" class="close" tabindex="-1" on-tap="_removeToken">×</a>
+          </div>
+        </template>
+      </div>
+      <div class="inline">
+        <input placeholder="Enter text here" id="tag-input" type="text" class="token-input" on-keydown="_onKeyPress"/>
+      </div>
     </div>
+
   </template>
 
 </dom-module>
@@ -122,6 +162,11 @@ Example:
       var removed = e.model.arrayDelete(this.tags, e.model.item);
       this.tags = _.without(this.tags, removed);
     },
+
+    _focusInput: function() {
+      var input = this.$$('#tag-input');
+      input.focus();
+    }
   });
 
 </script>
