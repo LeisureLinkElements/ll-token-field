@@ -108,16 +108,7 @@ Example:
       outline: none;
     }
 
-    .tokens {
-      display: none;
-      padding: 0 6px;
-    }
-
-    .hasTags .tokens {
-      display: inline-block;
-    }
-
-    .input-container {
+    .input-container, .tokens {
       display: inline-block;
     }
 
@@ -159,8 +150,7 @@ Example:
         reflectToAttribute: true,
         value: function() {
           return [];
-        },
-        observer: '_tagsChanged'
+        }
       },
       placeholder: {
         type: String,
@@ -195,9 +185,6 @@ Example:
     _focusInput: function() {
       var input = this.$$('#tag-input');
       input.focus();
-    },
-    _tagsChanged: function() {
-      this.toggleClass('hasTags', (this.tags.length > 0), this.$['tags-container']);
     }
   });
 
