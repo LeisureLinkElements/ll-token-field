@@ -28,10 +28,9 @@ Example:
     .tokenfield {
       height: 100%;
       min-height: 34px;
-      overflow-y: auto;
-      overflow-x: hidden;
+
       /*Hiding some fields so the parent can control them*/
-      padding: 6px 12px;
+      padding: 0;
       border: 0;
       box-shadow: none;
 
@@ -111,6 +110,10 @@ Example:
 
     .inline {
       display: inline-block;
+    }
+
+    .inline:first-child {
+      padding: 6px;
     }
   </style>
 
