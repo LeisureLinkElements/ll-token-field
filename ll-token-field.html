@@ -22,12 +22,19 @@ Example:
     :host {
       display: block;
       box-sizing: border-box;
+      height: 100%;
     }
 
     .tokenfield {
-      height: auto;
+      height: 100%;
       min-height: 34px;
-      padding-bottom: 0px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      /*Hiding some fields so the parent can control them*/
+      padding: 6px 12px;
+      border: 0;
+      box-shadow: none;
+
     }
     .tokenfield.focus {
       border-color: #66afe9;
@@ -98,6 +105,10 @@ Example:
       box-shadow: none;
     }
 
+    .token a:focus {
+      outline: none;
+    }
+
     .inline {
       display: inline-block;
     }
@@ -114,7 +125,7 @@ Example:
         </template>
       </div>
       <div class="inline">
-        <input placeholder="Enter text here" id="tag-input" type="text" class="token-input" on-keydown="_onKeyPress"/>
+        <input placeholder$="[[placeholder]]" id="tag-input" type="text" class="token-input" on-keydown="_onKeyPress"/>
       </div>
     </div>
 
@@ -140,6 +151,12 @@ Example:
         value: function() {
           return [];
         }
+      },
+      placeholder: {
+        type: String,
+        value: '',
+        reflectToAttribute: true,
+        notify: true
       }
     },
 
@@ -161,6 +178,8 @@ Example:
     _removeToken: function(e) {
       var removed = e.model.arrayDelete(this.tags, e.model.item);
       this.tags = _.without(this.tags, removed);
+      e.preventDefault();
+      e.stopPropagation();
     },
 
     _focusInput: function() {
