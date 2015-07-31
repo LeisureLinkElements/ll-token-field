@@ -108,18 +108,24 @@ Example:
       outline: none;
     }
 
-    .inline {
+    .tokens {
+      display: none;
+      padding: 0 6px;
+    }
+
+    .hasTags .tokens {
       display: inline-block;
     }
 
-    .inline:first-child {
-      padding: 6px;
+    .input-container {
+      display: inline-block;
     }
+
   </style>
 
   <template>
     <div class="tokenfield form-control" id="tags-container" on-tap="_focusInput">
-      <div class="inline">
+      <div class="tokens">
         <template is="dom-repeat" items="[[tags]]">
           <div class="token">
             <span class="token-label" style="max-width: 770px;">{{item}}</span>
@@ -127,7 +133,7 @@ Example:
           </div>
         </template>
       </div>
-      <div class="inline">
+      <div class="input-container">
         <input placeholder$="[[placeholder]]" id="tag-input" type="text" class="token-input" on-keydown="_onKeyPress"/>
       </div>
     </div>
@@ -153,7 +159,8 @@ Example:
         reflectToAttribute: true,
         value: function() {
           return [];
-        }
+        },
+        observer: '_tagsChanged'
       },
       placeholder: {
         type: String,
@@ -188,6 +195,9 @@ Example:
     _focusInput: function() {
       var input = this.$$('#tag-input');
       input.focus();
+    },
+    _tagsChanged: function() {
+      this.toggleClass('hasTags', (this.tags.length > 0), this.$['tags-container']);
     }
   });
 
