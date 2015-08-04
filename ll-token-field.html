@@ -167,17 +167,17 @@ Example:
         e.stopPropagation();
         var newTag = input.value;
         input.value = '';
-        this.tags = this.tags.concat(newTag);
+        this.push('tags', newTag);
         input.focus();
       }
       else if (e.keyCode === 8 && input.value === '') { // Backspace
-        this.tags = this.tags.slice(0, -1);
+        debugger;
+        this.splice('tags', (this.tags.length -1), 1);
       }
     },
 
     _removeToken: function(e) {
-      var removed = e.model.arrayDelete(this.tags, e.model.item);
-      this.tags = _.without(this.tags, removed);
+      this.splice('tags', e.model.index, 1 );
       e.preventDefault();
       e.stopPropagation();
     },
