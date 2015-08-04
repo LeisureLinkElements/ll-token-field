@@ -168,16 +168,18 @@ Example:
         var newTag = input.value;
         input.value = '';
         this.push('tags', newTag);
+        this.tagChanged();
         input.focus();
       }
       else if (e.keyCode === 8 && input.value === '') { // Backspace
-        debugger;
         this.splice('tags', (this.tags.length -1), 1);
+        this.tagChanged();
       }
     },
 
     _removeToken: function(e) {
       this.splice('tags', e.model.index, 1 );
+      this.tagChanged();
       e.preventDefault();
       e.stopPropagation();
     },
@@ -185,6 +187,11 @@ Example:
     _focusInput: function() {
       var input = this.$$('#tag-input');
       input.focus();
+    },
+    tagChanged: function() {
+      //needing to hard reset the tags object to get it reflected to the attribute
+      this.tags = this.tags.splice(0);
+      this.fire('ll-token-modified', this.tags)
     }
   });
 
