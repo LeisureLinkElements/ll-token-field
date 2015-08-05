@@ -26,10 +26,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       var myEl = document.querySelector('ll-token-field');
 
       describe('<ll-token-field>', function() {
+
         afterEach(function(done) {
           myEl.tags = [];
           flush(done);
         });
+
+        var removeToken = function(value) {
+          var evt = {
+            keyCode: 8 // Backspace
+          };
+
+          myEl.$$('#tag-input').value = value;
+          myEl._onKeyPress(evt);
+        };
 
         describe('Basic behavior', function() {
           it('can be placed on the page', function() {
@@ -42,6 +52,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
 
         describe('Adding tags', function() {
+
           it('can add a tag when input is not empty', function() {
             expect(myEl.tags.length).to.eql(0);
             var evt = {
@@ -52,11 +63,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             myEl.$$('#tag-input').value = '1';
             myEl._onKeyPress(evt);
             expect(myEl.tags.length).to.eql(1);
-            expect(myEl.tags).to.eql(['1']);
+            expect(myEl.tags[0]).to.eql('1');
           });
 
           it('cannot add a tag when input is empty', function() {
-            console.log(myEl.tags.length);
             expect(myEl.tags.length).to.eql(0);
             var evt = {
               stopPropagation: function() {},
@@ -68,6 +78,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             myEl._onKeyPress(evt);
             expect(myEl.tags.length).to.eql(0);
           });
+
+          it('cannot add a tag if the input is whitespace', function() {
+            expect(myEl.tags.length).to.eql(0);
+            var evt = {
+              stopPropagation: function() {},
+              preventDefault: function() {},
+              keyCode: 9 // TAB
+            };
+
+            myEl.$$('#tag-input').value = '       ';
+            myEl._onKeyPress(evt);
+            expect(myEl.tags.length).to.eql(0);
+          });
         });
 
         describe('Removing tags', function() {
@@ -75,13 +98,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             insertItem(1);
             insertItem(2);
             expect(myEl.tags.length).to.eql(2);
-
-            var evt = {
-              keyCode: 8 // Backspace
-            };
-
-            myEl.$$('#tag-input').value = '';
-            myEl._onKeyPress(evt);
+            removeToken('');
             expect(myEl.tags.length).to.eql(1);
           });
 
@@ -89,13 +106,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             insertItem(1);
             insertItem(2);
             expect(myEl.tags.length).to.eql(2);
-
-            var evt = {
-              keyCode: 8 // Backspace
-            };
-
-            myEl.$$('#tag-input').value = 'block';
-            myEl._onKeyPress(evt);
+            removeToken('block');
             expect(myEl.tags.length).to.eql(2);
           });
 
@@ -104,8 +115,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           };
         });
 
+        describe('tagChanged event', function() {
+
+          it('should raise an event when a tag is removed', function() {
+
+            expect(myEl.tags.length).to.be.eql(0);
+            myEl.tags.push('This tag');
+            myEl.tags.push('This tag1');
+            myEl.tags.push('This tag2');
+            myEl.tags.push('This tag3');
+            expect(myEl.tags.length).to.be.eql(4);
+
+            myEl.addEventListener('ll-token-modified', function(e) {
+              expect(e.detail.length).to.be.eql(3);
+            });
+
+            removeToken('');
+          });
+        })
       });
     </script>
-
   </body>
 </html>

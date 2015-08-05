@@ -1,13 +1,4 @@
 <!doctype html>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
 <html>
   <head>
     <meta charset="utf-8">
@@ -16,11 +7,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="../ll-token-field.html">
   </head>
-  <body>
+  <body style="margin: 30px;">
 
     <p>An example of <code>&lt;ll-token-field&gt;</code>:</p>
 
-    <ll-token-field tags='["1", "2", "3", "4"]'></ll-token-field>
+    <div style="height: 100px; border:1px solid gainsboro; border-radius: 4px; padding: 5px;">
+      <ll-token-field tags='["1", "2", "3", "4"]'></ll-token-field>
+    </div>
+
+
+    <br/>
+    Passing in placeholder text:
+    <ll-token-field tags='["1", "2", "3", "4"]' placeholder="This is my text!"></ll-token-field>
 
   </body>
 </html>
