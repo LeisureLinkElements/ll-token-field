@@ -35,12 +35,6 @@ Example:
       box-shadow: none;
 
     }
-    .tokenfield.focus {
-      border-color: #66afe9;
-      outline: 0;
-      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, 0.6);
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, 0.6);
-    }
 
     .token {
       -webkit-box-sizing: border-box;
@@ -50,8 +44,8 @@ Example:
       -moz-border-radius: 3px;
       border-radius: 3px;
       display: inline-block;
-      border: 1px solid #d9d9d9;
-      background-color: #fff;
+      border: 1px solid var(--gray);
+      background-color: var(--white);
       white-space: nowrap;
       margin: -1px 5px 5px 0;
       height: 22px;
@@ -60,11 +54,7 @@ Example:
     }
 
     .token:hover {
-      border-color: #b9b9b9;
-    }
-    .token.active {
-      border-color: #52a8ec;
-      border-color: rgba(82, 168, 236, 0.8);
+      border-color: var(--darken);
     }
     .token .token-label {
       display: inline-block;
@@ -72,7 +62,7 @@ Example:
       text-overflow: ellipsis;
       padding-left: 4px;
       vertical-align: top;
-      color: #0069A9;
+      color: var(--blue);
     }
     .token .close {
       font-family: Arial;
