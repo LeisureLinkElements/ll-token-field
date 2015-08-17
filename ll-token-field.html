@@ -149,7 +149,11 @@ Example:
         notify: true
       }
     },
-
+    ready: function() {
+      if(!this.tags) {
+        this.tags = [];
+      }
+    },
     _onKeyPress: function(e) {
       var input = this.$$('#tag-input');
       if(e.keyCode ===  9 && input.value && /\S/.test(input.value)) { // TAB

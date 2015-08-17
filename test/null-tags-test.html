@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../ll-token-field.html">
+  </head>
+  <body>
+
+  <ll-token-field tags=null></ll-token-field>
+
+  <script>
+    var myEl = document.querySelector('ll-token-field');
+
+    describe('NUll tags', function() {
+      it('should default a null value to an empty array', function() {
+        expect(myEl.tags).to.be.eql([]);
+      });
+
+      it('should not throw an exception when adding tags', function() {
+        var evt = {
+          stopPropagation: function() {},
+          preventDefault: function() {},
+          keyCode: 9 // TAB
+        };
+        myEl.$$('#tag-input').value = '1';
+        myEl._onKeyPress(evt);
+      });
+    });
+  </script>
+
+  </body>
+</html>
+
