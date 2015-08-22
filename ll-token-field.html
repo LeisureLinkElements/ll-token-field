@@ -157,6 +157,7 @@ Example:
     _onKeyPress: function(e) {
       var input = this.$$('#tag-input');
       if(e.keyCode ===  9 && input.value && /\S/.test(input.value)) { // TAB
+        this.tags = this.tags || [];
         e.preventDefault();
         e.stopPropagation();
         var newTag = input.value;
