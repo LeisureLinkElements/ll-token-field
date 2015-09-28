@@ -3,6 +3,13 @@
 An element providing a starting point for your own reusable Polymer elements.
 
 
+## Styling
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--ll-token-field` | The background color of the tooltip | `{}`
+
 ## Dependencies
 
 Element dependencies are managed via [Bower](http://bower.io/). You can
