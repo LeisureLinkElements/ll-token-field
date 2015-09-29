@@ -50,7 +50,7 @@ Example:
       border-radius: 3px;
       display: inline-block;
       border: 1px solid var(--gray);
-      background-color: var(--white);
+      background-color: inherit;
       white-space: nowrap;
       margin: -1px 5px 5px 0;
       height: 22px;
@@ -125,6 +125,10 @@ Example:
       font-weight: 600;
       color: var(--gray-darker);
       text-decoration: underline;
+    }
+
+    :host.readOnly .input-container {
+      display: none;
     }
 
   </style>
