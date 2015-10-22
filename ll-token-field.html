@@ -35,7 +35,10 @@ Example:
       box-shadow: none;
 
       @apply(--ll-token-field);
+    }
 
+    :host.readOnly .tokenfield {
+      @apply(--ll-token-field-readOnly);
     }
 
     .token {
@@ -47,7 +50,7 @@ Example:
       border-radius: 3px;
       display: inline-block;
       border: 1px solid var(--gray);
-      background-color: var(--white);
+      background-color: inherit;
       white-space: nowrap;
       margin: -1px 5px 5px 0;
       height: 22px;
@@ -104,6 +107,30 @@ Example:
       display: inline-block;
     }
 
+    :host.readOnly .token {
+      border: none;
+      margin: 0;
+      font-weight: 400px;
+      color: black;
+    }
+    :host.readOnly .token a {
+      display: none;
+    }
+
+    :host.readOnly .token:nth-last-child(n+3):after {
+      content: ', ';
+    }
+
+    :host.readOnly .tokenfield .token span {
+      font-weight: 600;
+      color: var(--gray-darker);
+      text-decoration: underline;
+    }
+
+    :host.readOnly .input-container {
+      display: none;
+    }
+
   </style>
 
   <template>
@@ -149,6 +176,11 @@ Example:
         value: '',
         reflectToAttribute: true,
         notify: true
+      },
+      readOnly: {
+        type: Boolean,
+        value: false,
+        observer: '_handleReadOnlyChange'
       }
     },
     ready: function() {
@@ -189,6 +221,9 @@ Example:
       //needing to hard reset the tags object to get it reflected to the attribute
       this.tags = this.tags.splice(0);
       this.fire('ll-token-modified', this.tags)
+    },
+    _handleReadOnlyChange: function() {
+      this.toggleClass('readOnly', this.readOnly, this.$.tokenfield);
     }
   });
 
