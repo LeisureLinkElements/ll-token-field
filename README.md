@@ -8,7 +8,9 @@ The following custom properties and mixins are available for styling:
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--ll-token-field` | The background color of the tooltip | `{}`
+`--ll-token-field` | The mixin applied to the tokenfield | `{}`
+`--ll-token-field-readOnly` | The mixin applied to the tokenfield when it is in readOnly mode | `{}`
+
 
 ## Dependencies
 
