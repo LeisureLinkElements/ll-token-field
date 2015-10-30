@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../ll-token-field.html">
+  </head>
+  <body>
+
+  <ll-token-field tags='["Exterior", "Park City","Mountain","Resort"]' read-only></ll-token-field>
+
+  <script>
+    var myEl = document.querySelector('ll-token-field');
+
+    describe('Readonly mode', function() {
+
+      it('should set the readonly property', function() {
+        expect(myEl.readOnly).to.be.true;
+      });
+
+      it('should set a read only class on the main element', function() {
+        expect(myEl.classList.contains('readOnly')).to.be.true;
+      });
+
+    });
+  </script>
+
+  </body>
+</html>
+

@@ -6,7 +6,6 @@
     <title>ll-token-field Demo</title>
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="../ll-token-field.html">
-
     <style is="custom-style">
 
       ll-token-field {
@@ -16,26 +15,38 @@
         };
       }
 
+      ll-token-field.readOnly {
+        --ll-token-field-readOnly: {
+          border: none;
+        };
+      }
+
     </style>
   </head>
   <body style="margin: 30px;">
 
-    <p>An example of <code>&lt;ll-token-field&gt;</code>:</p>
+  <p>An example of <code>&lt;ll-token-field&gt;</code>:</p>
 
-    <div style="height: 100px;">
-      <ll-token-field tags='["1", "2", "3", "4"]'></ll-token-field>
-    </div>
+  <div style="height: 100px;">
+    <ll-token-field tags='["1", "2", "3", "4"]'></ll-token-field>
+  </div>
 
 
-    <br/>
-    Passing in placeholder text:
-    <ll-token-field tags='["1", "2", "3", "4"]' placeholder="This is my text!"></ll-token-field>
+  <br/>
+  Passing in placeholder text:
+  <ll-token-field tags='["1", "2", "3", "4"]' placeholder="This is my text!"></ll-token-field>
 
-    <br/>
-    Passing in a null tags array
-    <div style="height: 100px;">
-        <ll-token-field tags=null></ll-token-field>
-    </div>
+  <br/>
+  Passing in a null tags array
+  <div style="height: 100px;">
+    <ll-token-field tags=null></ll-token-field>
+  </div>
+
+  <br/>
+  Read-only mode
+  <div style="height: 100px;">
+    <ll-token-field tags='["Exterior", "Park City","Mountain","Resort", "Pool"]' read-only></ll-token-field>
+  </div>
 
   </body>
 </html>
