@@ -21,7 +21,6 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0",
-    "lodash": "~3.10.0",
     "ll-theme": "LeisureLinkElements/ll-theme"
   },
   "devDependencies": {
